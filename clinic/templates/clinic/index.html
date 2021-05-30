@@ -10,18 +10,22 @@ Home
       <div class="top-bar-left">
         <ul class="menu">
           <li class="menu-text">Home</li>
-          <li><a href="#">One</a></li>
-          <li><a href="#">Two</a></li>
-          <li><a href="#">Three</a></li>
+          <li><a href="#">Resources</a></li>
+          {% comment %} <li><a href="#">Two</a></li>
+          <li><a href="#">Three</a></li> {% endcomment %}
         </ul>
       </div>
 </div>
-<div id="app">
+<div>
     <div id="maincontainer"></div>
     <div class="callout primary">
+    
         <h2>Welcome to Django and Vue</h5>
         <p>This is a simple code project</p>
-        <a href="#0">Here are some resources.</a>
+        <div id="app">
+            <p>[[ successmsg ]]</p>
+            <a href="#0">Test did not succeed.</a>
+        </div>
     </div>
     </div>
 {% endblock %}

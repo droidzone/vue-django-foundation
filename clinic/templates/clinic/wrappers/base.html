@@ -1,0 +1,43 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    {% block common_css %}
+    <link rel="stylesheet" href="{% static 'clinic/foundation/css/foundation.css' %}" />
+    {% endblock %}
+
+    {% block css %}
+    {% endblock %}
+
+  </head>
+  <body>
+
+    <title>
+    {% block title %}
+    {% endblock %}
+    </title>
+    
+    {% block content %}
+    {% endblock %}
+   
+    {% block common_js %}
+        <script src="{% static 'clinic/jquery/jquery.js' %}"></script>
+        <script src="{% static 'clinic/foundation/js/foundation.js' %}"></script>
+        <script src="{% static 'clinic/vue/vue.global.js' %}"></script>
+        <script>
+            $(document).foundation();
+        </script>
+    {% endblock %}
+
+    {% block vuejs %}
+        <script src="{% static 'clinic/vue-main/main.js' %}"></script>
+    {% endblock %}
+
+    {% block js %}
+    {% endblock %}
+  </body>
+</html>
