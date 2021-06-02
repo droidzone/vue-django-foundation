@@ -1,0 +1,1 @@
+../../../../static/src/vue/dist/service-worker.js
