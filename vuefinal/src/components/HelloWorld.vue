@@ -1,11 +1,10 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      
-    </p>
-    
+  <div class="row">
+    <div class="columns small-4"></div>
+    <div class="columns"><h1>{{ msg }}</h1></div>
+    <div class="columns small-4"></div>
   </div>
+
 </template>
 
 <script>

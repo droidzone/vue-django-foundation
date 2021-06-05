@@ -29,7 +29,7 @@ export default createStore({
   actions: {
     login({ commit }, credentials) {
       return axios
-        .post("http://127.0.0.1:8000/api/api-token-auth/", {
+        .post("/api/api-token-auth/", {
           username: credentials.username,
           password: credentials.password,
         })
