@@ -38,7 +38,9 @@ DATABASES = {'default': dj_database_url.config(default='postgres://pjtrsguagitvo
 
 
 ALLOWED_HOSTS = [
-    "localhost", "127.0.0.1",
+    "localhost", 
+    "127.0.0.1",
+    "emrlinks.herokuapp.com",
 ]
 
 
