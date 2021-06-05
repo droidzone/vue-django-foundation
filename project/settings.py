@@ -26,11 +26,15 @@ SECRET_KEY = 'django-insecure-^l0iez$1w#l+f7=7mu=$%7@e^=1bstad(9lvkyn-828t1vq27*
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL')
+#     )
+# }
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
 ALLOWED_HOSTS = []
 
 
