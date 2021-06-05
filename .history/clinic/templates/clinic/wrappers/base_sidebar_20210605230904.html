@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+    {% block common_css %}
+    <link rel="stylesheet" href="{% static 'clinic/foundation/css/foundation.css' %}" />
+     <link rel="shortcut icon" href="{% static 'clinic/vue/dist/favicon.ico' %}" />
+
+    {% endblock %}
+
+    {% block css %}
+    {% endblock %}
+  </head>
+  <body>
+
+    {% block topbar %}
+
+    {% endblock %}
+
+
+
+  {% block bodytitle %}
+
+  {% endblock %}
+
+  
+    <div class="row" id="content">
+      <div class="medium-8 columns">
+        {% block content %}
+        
+
+       
+      {% endblock %}
+      </div>
+    
+    </div>
+  
+   
+  {% block common_js %}
+  <script type="text/javascript" src="{% static 'clinic/vue/dist/js/chunk-vendors.js' %}"></script>
+    <script type="text/javascript" src="{% static 'clinic/vue/dist/js/app.js' %}"></script>
+    <script src="{% static 'clinic/jquery/jquery.js' %}"></script>
+    <script src="{% static 'clinic/foundation/js/foundation.js' %}"></script>
+    <script>
+        $(document).foundation();
+  </script>
+  {% endblock %}
+  </body>
+</html>
+
+
+
