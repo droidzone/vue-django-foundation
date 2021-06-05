@@ -1,0 +1,30 @@
+{% extends "clinic/wrappers/base_sidebar.html" %} 
+{% load static %} 
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<div id="app">
+
+    <div>
+        <div id="">
+            <!-- route outlet -->
+            <router-view></router-view> <!-- component matched by the route will render here -->
+    
+            <h1>Hello App!</h1>
+            <p>
+
+                
+            </p>
+            
+            
+            
+        </div>
+        
+        </div>
+
+    </div>
+</div>
+{% endblock %}
