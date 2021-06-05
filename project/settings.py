@@ -33,7 +33,9 @@ DEBUG = False
 # }
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+# DATABASES['default'] =  dj_database_url.config()
+DATABASES = {'default': dj_database_url.config(default='postgres://pjtrsguagitvov:cf0573d3423d2bae650f2ad31149159c8839f892650f50bdc1c37a8c31bdf342@ec2-52-5-247-46.compute-1.amazonaws.com:5432/d7oqeo54hturdo')}
+
 
 ALLOWED_HOSTS = []
 
