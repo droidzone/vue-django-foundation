@@ -41,6 +41,7 @@ ALLOWED_HOSTS = [
     "localhost", 
     "127.0.0.1",
     "emrlinks.herokuapp.com",
+    "emr.cx",
 ]
 
 
