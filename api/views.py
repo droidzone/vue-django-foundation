@@ -1,6 +1,5 @@
 from http.client import HTTPResponse
 from django.shortcuts import render
-# from itsdangerous import exc
 from rest_framework import viewsets
 from clinic.models import ShortLink
 from .serializers import ShortLinkSerializer
@@ -41,17 +40,46 @@ class ShortLinkViewSet(viewsets.ModelViewSet):
         else:
             return super(ShortLinkViewSet, self).create(request, *args, **kwargs)
 
-    # def update(self, instance, validated_data):
     def put(self, request, *args, **kwargs):
-        print("In update method..")
-        print("request", request)
-        print(dir(request))
-        print("Params:", request.query_params)
-        instance = self.get_object()
-        print(instance)
+        print("In put method..")
+        print("data:", request.data)
+        pk = request.data['params']['pk']
+        print("pk:", pk)
+        mydata = request.data['params']['link']
+        instance = ShortLink.objects.get(pk=pk)
+        print("Original long link:", instance.long_link)
+        # instance.long_link = mydata['long_link']
+        print("Updating data:", mydata['long_link'])
+        # print("Saving")
+
+        # serializer = ShortLinkSerializer(instance, data=mydata)
+        # if serializer.is_valid():
+        #     print("Serializer is valid. Saving..")
+        #     try:
+        #         serializer.save()
+        #         print("Saved updated short link")
+        #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+        #     except Exception as e:
+        #         print(f"Exception occurrance stalled: {str(e)}")
+        # else:
+        #     print("Serializer is NOT valid. ")
+        #     print(serializer.errors)
+        #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            # instance.save()
+            ShortLink.objects.filter(pk=pk).update(long_link=mydata['long_link'])
+            newlink = ShortLink.objects.get(pk=pk)
+            print("Updated link")
+            serializer = ShortLinkSerializer(newlink)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            print("An error occured updating link")
+            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
+
 
     def post(self, request, *args, **kwargs):
-        print("In update method..")
+        print("In post method..")
         print("request", request)
         print(dir(request))
         print("Params:", request.query_params)

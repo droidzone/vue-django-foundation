@@ -33,6 +33,7 @@ urlpatterns = [
 
 
      path('', include('clinic.urls')),
+     re_path(r'^(?P<url>.*)/$', include('clinic.urls')),
     #  re_path('^.*$', TemplateView.as_view(template_name="clinic/wrappers/base.html")),
 
 ]

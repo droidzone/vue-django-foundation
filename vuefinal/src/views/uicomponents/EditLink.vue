@@ -72,26 +72,24 @@ export default {
         backgroundColor: "#5498bf",
       });
       console.log(JSON.stringify(this.link, null, 2));
-    //   console.log('pk:' + this.link.id);
-
-
-    //   { "posttype": "new" }
-//     axios.get('/api', {
-//   params: {
-//     foo: 'bar'
-//   }
-// });
-
-
       axios
-        .post("/api/links/", {
+        .put(`/api/links/`, {
           params: {
               pk: this.link.id,
+              link: this.link,
           },
         })
         .then(({ data }) => {
           console.log(`data is`);
           console.log(data);
+          console.log(JSON.stringify(data, null, 2));
+          iziToast.show({
+            title: "Saved",
+            message: "Successfully updated long link.",
+            icon: "fa fa-check",
+            position: "topRight",
+            color: "green",
+          });
         })
         .catch((error) => {
           console.log("An error occured:");
