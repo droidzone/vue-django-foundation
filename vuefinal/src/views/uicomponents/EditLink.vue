@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form>
+    <form @submit.prevent="">
       <my-container>
         <h3>Edit Shortened link</h3>
         <div class="grid-x grid-padding-x">
@@ -26,14 +26,18 @@
               type="text"
               id="long-link"
               v-model="link.short_link"
-              placeholder="Long link to be shortened"
+              placeholder="Short link"
               autocomplete="off"
+              data-tooltip
+              title="You can't modify short links here."
+              data-position="top"
+              disabled
             />
           </div>
         </div>
         <div class="grid-x grid-padding-x">
           <div class="cell">
-            <button type="submit" class="button large" @click="CreateShortLink">
+            <button type="button" class="button large" @click="saveEdits">
               <i class="fad fa-save"></i> Save
             </button>
           </div>
@@ -44,17 +48,56 @@
 </template>
 
 <script>
+import axios from "axios";
 import MyContainer from "./MyContainer.vue";
 export default {
   components: { MyContainer },
   props: ["elem"],
+  emits: ["edit"],
   data() {
     return {
-        link: {
-
-        }
-    //   link: this.elem,
+      link: {},
+      //   link: this.elem,
     };
+  },
+  methods: {
+    saveEdits() {
+      console.log(`Saving edits...`);
+      iziToast.show({
+        title: "Saving edits",
+        message: "Sending data to server.",
+        icon: "fad fa-cog fa-spin",
+        position: "topRight", // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter, center
+        messageColor: "#ffffff",
+        backgroundColor: "#5498bf",
+      });
+      console.log(JSON.stringify(this.link, null, 2));
+    //   console.log('pk:' + this.link.id);
+
+
+    //   { "posttype": "new" }
+//     axios.get('/api', {
+//   params: {
+//     foo: 'bar'
+//   }
+// });
+
+
+      axios
+        .post("/api/links/", {
+          params: {
+              pk: this.link.id,
+          },
+        })
+        .then(({ data }) => {
+          console.log(`data is`);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log("An error occured:");
+          console.log(error);
+        });
+    },
   },
   mounted() {
     console.log("Route:");
@@ -62,29 +105,11 @@ export default {
     console.log(JSON.stringify(this.$route, null, 2));
     console.log("Params:");
     console.log(this.$route.params);
-    this.link = {
-        id: this.$route.params.id,
-        short_link: this.$route.params.short_link,
-        long_link: this.$route.params.long_link,
-    }
-    // console.log(JSON.stringify(this.$route.params, null, 2));
-    // console.log("elem:");
-    // console.log(JSON.stringify(this.$route.params.elem, null, 2));
-
-
-    
-    // console.log("EditLink was mounted.");
-    // console.log(`This is`);
-    // console.log(JSON.stringify(this, null, 2));
-    // console.log(`Link is `);
-    // console.log(this.link);
-    // console.log(`el is `);
-    // console.log(this.el);
-    // console.log(JSON.stringify(this.el, null, 2));
-    // console.log(`id is `);
-    // console.log(this.el.id);
-    // this.isLoading = true;
-    // this.reload();
+    console.log("Stringified params:");
+    console.log(JSON.stringify(this.$route.params, null, 2));
+    console.log("ID:");
+    console.log(this.$route.params.id);
+    this.link = this.$route.params;
   },
 };
 </script>

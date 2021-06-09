@@ -29,6 +29,7 @@
               class="grid-x"
               @delete="deleteLink"
               @edit="editLink"
+              @update="updateLink"
             >
             </short-link-list-el>
           </div>
@@ -108,10 +109,10 @@ export default {
               icon: "fad fa-exclamation-triangle ",
               position: "topRight", // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter, center
               messageColor: "#ffffff",
-        backgroundColor: "#5498bf",
+              backgroundColor: "#5498bf",
               titleColor: "#e02d2d",
             });
-            
+
             this.$router.push({ path: "/login" });
             return;
           }
@@ -134,6 +135,10 @@ export default {
           }
         });
     },
+    updateLink(myLink) {
+      console.log(`About to update link: ${myLink}`);
+    },
+
     deleteLink(id) {
       console.log(`ID is ${id}. Deleting..`);
       this.isLoading = true;
@@ -167,19 +172,15 @@ export default {
       console.log(JSON.stringify(this.links));
       console.log(`In DashBoard: editLink. Got id:${el}. The link is:`);
       console.log(JSON.stringify(el, null, 2));
-      this.$router.push(
-        { 
-          name: 'EditLink', 
-          params: { 
-            id: el.id,
-            short_link:el.short_link,
-            long_link:el.long_link,
-
-            } 
-        });
+      this.$router.push({
+        name: "EditLink",
+        params: {...el},
+      });
       // this.$router.push({ name: 'foo', params: {title: 'test title' }})
-
-    }
+      // id: el.id,
+      //     short_link: el.short_link,
+      //     long_link: el.long_link,
+    },
   },
 };
 </script>

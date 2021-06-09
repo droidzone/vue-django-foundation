@@ -40,6 +40,28 @@ class ShortLinkViewSet(viewsets.ModelViewSet):
             return super(ShortLinkViewSet, self).update(request, *args, **kwargs)
         else:
             return super(ShortLinkViewSet, self).create(request, *args, **kwargs)
+
+    # def update(self, instance, validated_data):
+    def put(self, request, *args, **kwargs):
+        print("In update method..")
+        print("request", request)
+        print(dir(request))
+        print("Params:", request.query_params)
+        instance = self.get_object()
+        print(instance)
+
+    def post(self, request, *args, **kwargs):
+        print("In update method..")
+        print("request", request)
+        print(dir(request))
+        print("Params:", request.query_params)
+        instance = self.get_object()
+        print(instance)
+
+        # Update the Foo instance
+        # instance.title = validated_data['title']
+        # instance.save()
+        # return instance
         # serializer = self.get_serializer(data=request.data)
         # serializer.is_valid(raise_exception=True)
         # self.perform_create(serializer)
