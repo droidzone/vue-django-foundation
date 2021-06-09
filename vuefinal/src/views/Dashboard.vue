@@ -28,6 +28,7 @@
               :el="link"
               class="grid-x"
               @delete="deleteLink"
+              @edit="editLink"
             >
             </short-link-list-el>
           </div>
@@ -35,7 +36,7 @@
       </div>
       <div class="cell small-1">
         <button type="button" class="button" @click="CreateNew">
-          <i class="fad fa-bolt"></i> Create
+          <i class="far fa-plus-square"></i> Create
         </button>
       </div>
     </div>
@@ -96,18 +97,34 @@ export default {
           });
         })
         .catch((error) => {
-          console.log("An error occured");
+          console.log("An error occured:");
           this.isLoading = false;
+          console.log(error);
+          console.log(JSON.stringify(error, null, 2));
+          if (error.message.includes("status code 401")) {
+            iziToast.show({
+              title: "You have to login",
+              message: "You have to login to access the dashboard.",
+              icon: "fad fa-exclamation-triangle ",
+              position: "topRight", // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter, center
+              messageColor: "#ffffff",
+        backgroundColor: "#5498bf",
+              titleColor: "#e02d2d",
+            });
+            
+            this.$router.push({ path: "/login" });
+            return;
+          }
+
           iziToast.show({
             title: "Error",
             message: "An error occured connecting to server.",
-            icon: "fad fa-cog fa-spin",
+            icon: "fad fa-exclamation-triangle",
             position: "topRight", // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter, center
             messageColor: "#ffffff",
             backgroundColor: "#e02d2d",
             titleColor: "#e02d2d",
           });
-
           if (error.response) {
             console.log(`error is ${error}`);
             console.log(error);
@@ -146,6 +163,23 @@ export default {
     CreateNew() {
       this.$router.push({ name: "CreateLink" });
     },
+    editLink(el) {
+      console.log(JSON.stringify(this.links));
+      console.log(`In DashBoard: editLink. Got id:${el}. The link is:`);
+      console.log(JSON.stringify(el, null, 2));
+      this.$router.push(
+        { 
+          name: 'EditLink', 
+          params: { 
+            id: el.id,
+            short_link:el.short_link,
+            long_link:el.long_link,
+
+            } 
+        });
+      // this.$router.push({ name: 'foo', params: {title: 'test title' }})
+
+    }
   },
 };
 </script>

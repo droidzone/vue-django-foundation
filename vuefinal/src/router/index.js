@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Dashboard from "../views/Dashboard.vue";
 import LoginUser from "../views/LoginUser.vue";
 import CreateLink from "../views/CreateLink.vue";
+import EditLink from "../views/uicomponents/EditLink.vue";
 
 const routes = [
   {
@@ -34,6 +35,12 @@ const routes = [
     name: "CreateLink",
     component: CreateLink,
   },
+  {
+    path:"/editlink",
+    name:"EditLink",
+    component:EditLink,
+    props: true,
+  }
 ];
 
 const router = createRouter({

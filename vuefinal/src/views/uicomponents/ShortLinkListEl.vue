@@ -14,8 +14,24 @@
         ><span style="word-wrap: break-word;">{{ link.long_link }}</span></a
       >
     </div>
+
     <div class="cell small-2" style="border: 2px solid #466d98;">
-      <button type="button" class="alert button" @click="$emit('delete', link.id)">         <!--  @click="deleteLink(link.id)" -->
+      <!-- <router-link to="/editlink"
+        ><EditLink el="link" />
+      </router-link> -->
+      <button
+        type="button"
+        class="success button"
+        @click="$emit('edit', link)"
+      >
+        Edit
+      </button>
+      <button
+        type="button"
+        class="alert button"
+        @click="$emit('delete', link.id)"
+      >
+        <!--  @click="deleteLink(link.id)" -->
         Delete
       </button>
     </div>
@@ -25,10 +41,10 @@
 <script>
 export default {
   props: ["el"],
-  emits: ['delete'],
+  emits: ["delete", "edit"],
   data() {
     return {
-        link: this.el,
+      link: this.el,
     };
   },
 };

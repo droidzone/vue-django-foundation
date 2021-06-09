@@ -1,3 +1,7 @@
 .history/
 .git/
 staticfiles/
+static/clinic/vue/dist/*hot-update.json
+static/clinic/vue/dist/app.*.hot-update.js
+static/clinic/vue/dist/chunk-vendors.*.hot-update.js
+.vscode/
